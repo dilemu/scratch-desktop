@@ -81,7 +81,7 @@
     "nets": "^3.2.0",
     "node-localstorage": "^2.1.6",
     "npm-force-resolutions": "0.0.10",
-    "delightmom-scratch-gui": "Dbit+-v1.0.1",
+    "delightmom-scratch-gui": "github:dilemu/scratch-gui#Dbit+-v1.0.1",
     "delightmom-scratch-l10n": "0.1.0",
     "os-locale": "^5.0.0",
     "react": "^16.14.0",
