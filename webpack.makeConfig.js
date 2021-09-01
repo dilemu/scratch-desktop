@@ -74,7 +74,7 @@ const makeConfig = function (defaultConfig, options) {
                 },
                 { // coped from scratch-gui
                     test: /\.css$/,
-                    exclude: MONACO_DIR,
+                    exclude: [MONACO_DIR, /antd.css/, /web-cam.css/],
                     use: [{
                         loader: 'style-loader'
                     }, {
@@ -108,9 +108,9 @@ const makeConfig = function (defaultConfig, options) {
                 },
                 {
                     test: /\.css$/,
-                    include: MONACO_DIR,
+                    include: [MONACO_DIR, /antd.css/, /web-cam.css/],
                     use: ['style-loader', 'css-loader']
-                }
+                },
             ]
         },
         plugins: [
