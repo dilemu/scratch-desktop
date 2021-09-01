@@ -30,7 +30,7 @@ jobs:
       - name: Archive production artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: OpenBlockDesktop-win-x64.exe
+          name: DBit+-win-x64.exe
           path: dist/OpenBlock*Setup.exe
           retention-days: 1
   create-release:
@@ -74,8 +74,8 @@ jobs:
       - name: Zip win x64 file
         uses: papeloto/action-zip@v1
         with:
-            files: OpenBlockDesktop-win-x64.exe
-            dest: OpenBlockDesktop-win-x64.zip
+            files: DBit+-win-x64.exe
+            dest: DBit+-win-x64.zip
 
       - name: Relase Windows x64 package
         uses: actions/upload-release-asset@v1
@@ -83,13 +83,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./OpenBlockDesktop-win-x64.zip
-          asset_name: OpenBlockDesktop-${{ steps.package-version.outputs.current-version }}-win-x64.zip
+          asset_path: ./DBit+-win-x64.zip
+          asset_name: DBit+-${{ steps.package-version.outputs.current-version }}-win-x64.zip
           asset_content_type: application/zip
 
       # Checksum Release
       - name: Checksum
-        run: sha256sum OpenBlockDesktop-*.zip >> checksums.txt
+        run: sha256sum DBit+-*.zip >> checksums.txt
 
       - uses: actions/upload-release-asset@v1
         env:

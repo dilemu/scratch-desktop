@@ -3,7 +3,7 @@
   "productName": "Dbit+",
   "description": "Dbit+ as a self-contained desktop application",
   "author": "bjppss",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "license": "MIT",
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
