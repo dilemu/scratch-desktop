@@ -3,9 +3,10 @@
   "productName": "Dbit+",
   "description": "Dbit+ as a self-contained desktop application",
   "author": "bjppss",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "license": "MIT",
   "scripts": {
+    "link": "npm link delightmom-scratch-gui delightmom-scratch-l10n",
     "preinstall": "npx npm-force-resolutions",
     "postinstall": "electron-builder install-app-deps",
     "clean": "rimraf ./dist ./statics ./external-resources ./tools ./translations ./firmwares ./drivers",
@@ -30,8 +31,7 @@
     "dist32": "npm run clean && npm run compile && npm run fetch:all32 && npm run doBuild -- --mode=dist --arch=ia32",
     "distDev": "npm run clean && npm run compile && npm run fetch:all && npm run doBuild -- --mode=dev",
     "test": "npm run test:lint",
-    "test:lint": "eslint --cache --color --ext .jsx,.js src scripts",
-    "link": "npm link delightmom-scratch-gui delightmom-scratch-l10n"
+    "test:lint": "eslint --cache --color --ext .jsx,.js src scripts"
   },
   "repository": {
     "type": "git",
