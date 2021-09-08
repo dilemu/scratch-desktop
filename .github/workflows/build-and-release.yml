@@ -31,7 +31,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: DBit+-win-x64.exe
-          path: dist/OpenBlock*Setup.exe
+          path: dist/DBit+*Setup.exe
           retention-days: 1
   create-release:
     needs: [build-windows]

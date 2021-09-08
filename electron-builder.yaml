@@ -25,12 +25,12 @@ mac:
   hardenedRuntime: true
   icon: buildResources/OpenBlockDesktop.icns
   provisioningProfile: embedded.provisionprofile
-  artifactName: "OpenBlock ${version}.${ext}"
+  artifactName: "DBit+ ${version}.${ext}"
   target:
     - dmg
     # - mas
 dmg:
-  title: "OpenBlock ${version}"
+  title: "DBit+ ${version}"
 # mas:
 #   category: public.app-category.education
 #   entitlements: buildResources/entitlements.mas.plist
@@ -55,4 +55,4 @@ nsis:
   allowToChangeInstallationDirectory: true
   include: buildResources/installer.nsh
 #   license: LICENSE
-  artifactName: "OpenBlock ${version} Setup.${ext}"
+  artifactName: "DBit+ ${version} Setup.${ext}"
