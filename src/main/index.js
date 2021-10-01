@@ -36,7 +36,7 @@ app.allowRendererProcessReuse = true;
 telemetry.appWasOpened();
 
 // const defaultSize = {width: 1096, height: 715}; // minimum
-const defaultSize = {width: 1280, height: 800}; // good for MAS screenshots
+const defaultSize = {width: 1300, height: 800}; // good for MAS screenshots
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
