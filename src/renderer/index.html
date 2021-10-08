@@ -1,25 +1,156 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <style>
-        body {
-           background-color: #4D97FF;
-        }
-        .splash {
-            color: white;
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            font-size: xx-large;
-            font-weight: bolder;
-            margin: 0;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-    </style>
-</head>
-<body>
-    <div id="app"><p class="splash">DBit+ is loading...</p></div>
-</body>
+    <head>
+        <meta charset="utf-8" />
+        <style>
+            body {
+                background-color: #4d97ff;
+            }
+            .splash {
+                color: white;
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                font-size: xx-large;
+                font-weight: bolder;
+                margin: 0;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            .loader_background {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 500;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                /* background-color: $motion-primary; */
+                background: url("https://video-1253248162.cos.ap-beijing.myqcloud.com/071a68cd7dbcd0124804c14b8e9f924f.png")
+                    no-repeat 0 0;
+                background-size: cover;
+                -webkit-background-size: cover;
+                -o-background-size: cover;
+                background-position: center 0;
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                text-align: center;
+                color: white;
+            }
+            .loader_xiaodi {
+                -webkit-animation: bounce-down 1.6s linear infinite;
+                animation: bounce-down 1.6s linear infinite;
+            }
+            @-webkit-keyframes bounce-down {
+                25% {
+                    -webkit-transform: translateY(-4px);
+                }
+                50%,
+                100% {
+                    -webkit-transform: translateY(0);
+                }
+                75% {
+                    -webkit-transform: translateY(4px);
+                }
+            }
+
+            @keyframes bounce-down {
+                25% {
+                    transform: translateY(-4px);
+                }
+                50%,
+                100% {
+                    transform: translateY(0);
+                }
+                75% {
+                    transform: translateY(4px);
+                }
+            }
+            .loader_process-bar {
+                width: 420px;
+                background-color: #1a1a1a;
+                line-height: 20px;
+                padding: 4px;
+                margin-top: 40px;
+            }
+
+            .loader_process-bar .loader_process-content {
+                width: 0;
+                height: 12px;
+                background-color: #17e9ea;
+                animation: process-animate-1 2s forwards,
+                    process-animate-2 4s 2s forwards,
+                    process-animate-3 2s 6s forwards;
+            }
+
+            @keyframes process-animate-1 {
+                from {
+                    width: 0;
+                }
+                to {
+                    width: 20%;
+                }
+            }
+            @-webkit-keyframes process-animate-1 {
+                from {
+                    width: 0;
+                }
+                to {
+                    width: 20%;
+                }
+            }
+
+            @keyframes process-animate-2 {
+                from {
+                    width: 20%;
+                }
+                to {
+                    width: 80%;
+                }
+            }
+            @-webkit-keyframes process-animate-2 {
+                from {
+                    width: 20%;
+                }
+                to {
+                    width: 80%;
+                }
+            }
+
+            @keyframes process-animate-3 {
+                from {
+                    width: 80%;
+                }
+                to {
+                    width: 100%;
+                }
+            }
+            @-webkit-keyframes process-animate-3 {
+                from {
+                    width: 80%;
+                }
+                to {
+                    width: 100%;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <div class="loader_background">
+                <div>
+                    <div class="loader_xiaodi">
+                        <img
+                            src="https://video-1253248162.cos.ap-beijing.myqcloud.com/3388b1231757f27cdbfb9b3c810e59df.png"
+                            alt="xiaodi"
+                        />
+                    </div>
+                    <div class="loader_process-bar">
+                        <div class="loader_process-content"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
