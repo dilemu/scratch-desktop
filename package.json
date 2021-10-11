@@ -3,7 +3,7 @@
   "productName": "Dbit+",
   "description": "Dbit+ as a self-contained desktop application",
   "author": "bjppss",
-  "version": "0.1.27",
+  "version": "0.1.28",
   "license": "MIT",
   "scripts": {
     "link": "npm link delightmom-scratch-gui delightmom-scratch-l10n",
