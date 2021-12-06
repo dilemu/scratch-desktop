@@ -38,6 +38,7 @@
     "url": "git+ssh://git@github.com/LLK/scratch-desktop.git"
   },
   "dependencies": {
+    "openblock-resource": "0.1.0-prerelease.20210529040649",
     "source-map-support": "^0.5.19"
   },
   "devDependencies": {
