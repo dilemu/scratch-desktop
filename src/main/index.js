@@ -23,11 +23,6 @@ import formatMessage from 'format-message';
 import locales from 'delightmom-scratch-l10n/locales/desktop-msgs';
 import osLocale from 'os-locale';
 
-import OpenBlockLink from 'openblock-link';
-import OpenblockResourceServer from 'openblock-resource';
-
-let resourceServer;
-
 const nodeStorage = new JSONStorage(app.getPath('userData'));
 
 // suppress deprecation warning; this will be the default in Electron 9
@@ -388,45 +383,11 @@ const createMainWindow = () => {
         // (re)save the userid, so it persists for the next app session.
         nodeStorage.setItem('userId', userId);
         webContents.send('setUserId', userId);
-
-        resourceServer.checkUpdate()
-            .then(info => {
-                if (info) {
-                    webContents.send('setUpdate', {phase: 'idle', version: info.version, describe: info.describe});
-                }
-            })
-            .catch(err => {
-                console.warn(`Error while checking for update: ${err}`);
-            });
     });
     ipcMain.on('reqeustCheckUpdate', () => {
-        resourceServer.checkUpdate()
-            .then(info => {
-                if (info) {
-                    webContents.send('setUpdate', {phase: 'idle', version: info.version, describe: info.describe});
-                } else {
-                    webContents.send('setUpdate', {phase: 'latest'});
-                }
-            })
-            .catch(err => {
-                webContents.send('setUpdate',
-                    {phase: 'error', message: err});
-            });
     });
 
     ipcMain.on('reqeustUpgrade', () => {
-        resourceServer.upgrade(state => {
-            webContents.send('setUpdate',
-                {phase: state.phase});
-        })
-            .then(() => {
-                app.relaunch();
-                app.exit();
-            })
-            .catch(err => {
-                webContents.send('setUpdate',
-                    {phase: 'error', message: err});
-            });
     });
 
     return window;
@@ -525,14 +486,6 @@ app.on('ready', () => {
     } else {
         resourcePath = path.join(appPath);
     }
-
-    // start link server
-    const link = new OpenBlockLink(dataPath, path.join(resourcePath, 'tools'));
-    link.listen();
-
-    // start resource server
-    resourceServer = new OpenblockResourceServer(dataPath, path.join(resourcePath, 'external-resources'));
-    resourceServer.listen();
 
     ipcMain.on('clearCache', () => {
         del.sync(dataPath, {force: true});
