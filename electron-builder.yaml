@@ -8,13 +8,13 @@ productName: "Dbit+"
 publish:
   - provider: github
   - provider: spaces
-    name: openblock
+    name: Dbit+
     path: desktop
     region: sgp1
 
 fileAssociations:
   ext: ob
-  name: OpenBlock project file
+  name: Dbit+ project file
   role: Editor
   icon: buildResources/OpenBlockFile.ico
 
@@ -53,9 +53,9 @@ win:
     - nsis
 # appx:
 #   identityName: "OpenblockTeam.OpenblockDesktop
-#   publisherDisplayName: "OpenBlock Team"
+#   publisherDisplayName: "Dbit+ Team"
 #   publisher: "CN=2EC43DF1-469A-4119-9AB9-568A0A1FF65F"
-#   artifactName: "OpenBlock ${version}.${ext}"
+#   artifactName: "Dbit+ ${version}.${ext}"
 nsis:
   oneClick: false # allow user to choose per-user or per-machine
   allowToChangeInstallationDirectory: true

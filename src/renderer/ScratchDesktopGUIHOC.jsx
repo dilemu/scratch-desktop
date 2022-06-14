@@ -6,7 +6,7 @@ import omit from 'lodash.omit';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
-import GUIComponent from 'openblock-gui/src/components/gui/gui.jsx';
+import GUIComponent from 'delightmom-scratch-gui/src/components/gui/gui.jsx';
 import {FormattedMessage} from 'react-intl';
 
 import {
@@ -17,17 +17,17 @@ import {
     requestNewProject,
     requestProjectUpload,
     setProjectId
-} from 'openblock-gui/src/reducers/project-state';
+} from 'delightmom-scratch-gui/src/reducers/project-state';
 import {
     openLoadingProject,
     closeLoadingProject,
     openTelemetryModal,
     openUpdateModal
-} from 'openblock-gui/src/reducers/modals';
-import {setUpdate} from 'openblock-gui/src/reducers/update';
+} from 'delightmom-scratch-gui/src/reducers/modals';
+import {setUpdate} from 'delightmom-scratch-gui/src/reducers/update';
 
-import analytics, {initialAnalytics} from 'openblock-gui/src/lib/analytics';
-import MessageBoxType from 'openblock-gui/src/lib/message-box.js';
+import analytics, {initialAnalytics} from 'delightmom-scratch-gui/src/lib/analytics';
+import MessageBoxType from 'delightmom-scratch-gui/src/lib/message-box.js';
 
 import ElectronStorageHelper from '../common/ElectronStorageHelper';
 
