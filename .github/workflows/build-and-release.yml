@@ -2,31 +2,41 @@ name: Build and release
 
 on:
   push:
-    branches: [ main ]
     tags:
       - 'v*'
+    paths-ignore:
+      - 'README.md'
+      - 'CHANGE.md'
+      - 'doc/*'
+      - '.github/*'
 
 jobs:
-  build-windows:
-    runs-on: windows-latest
+  create-release:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
-      - name: Use Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14.x'
+      - name: Get tag
+        id: tag
+        uses: dawidd6/action-get-tag@v1
 
-      - name: Npm Install
-        run: npm install
-
-      - name: Build Dist
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
         env:
-          GA_ID: ${{ secrets.GA_ID }}
-          NODE_ENV: production
-          NODE_OPTIONS: --max_old_space_size=4096
-        run: npm run dist
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.tag.outputs.tag }}
+          release_name: OpenBlock Desktop ${{ steps.tag.outputs.tag }}
+          body: |
+            ## Change Log (en)
 
+            - **New feature**
+
+                1. Feature 1.
+                2. Feature 2.
+
+# <<<<<<< HEAD
       - name: Archive production artifacts
         uses: actions/upload-artifact@v2
         with:
@@ -99,3 +109,73 @@ jobs:
           asset_path: checksums.txt
           asset_name: ${{ steps.package-version.outputs.current-version }}-checksums-sha256.txt
           asset_content_type: application/zip
+# =======
+#             - **Fix bug**
+
+#                 1. Bug 1.
+#                 2. Bug 2.
+
+#             ## 更改日志 (zh-cn)
+
+#             - **新功能**
+
+#                 1. 功能1。
+#                 2. 功能2。
+
+#             - **修复错误**
+
+#                 1. 错误1。
+#                 2. 错误2。
+#           draft: true
+#           prerelease: false
+
+#   build-windows:
+#     needs: create-release
+#     runs-on: windows-2019
+#     steps:
+#       - uses: actions/checkout@v2
+
+#       - name: Use Node.js
+#         uses: actions/setup-node@v2
+#         with:
+#           node-version: '14.x'
+
+#       - name: Npm Install
+#         run: |
+#           npm ci
+
+#       - name: Build and Publish
+#         env:
+#           GA_ID: ${{ secrets.GA_ID }}
+#           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+#           DO_KEY_ID: ${{ secrets.DO_KEY_ID }}
+#           DO_SECRET_KEY: ${{ secrets.DO_SECRET_KEY }}
+#           NODE_ENV: production
+#           NODE_OPTIONS: --max_old_space_size=4096
+#         run: npm run publish
+
+#   build-mac:
+#     needs: create-release
+#     runs-on: macos-latest
+#     steps:
+#       - uses: actions/checkout@v2
+
+#       - name: Use Node.js
+#         uses: actions/setup-node@v2
+#         with:
+#           node-version: '14.x'
+
+#       - name: Npm Install
+#         run: npm ci
+
+#       - name: Build and Publish
+#         env:
+#           GA_ID: ${{ secrets.GA_ID }}
+#           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+#           DO_KEY_ID: ${{ secrets.DO_KEY_ID }}
+#           DO_SECRET_KEY: ${{ secrets.DO_SECRET_KEY }}
+#           NODE_ENV: production
+#           NODE_OPTIONS: --max_old_space_size=8192
+#           CSC_IDENTITY_AUTO_DISCOVERY: false
+#         run: npm run publish
+# >>>>>>> 16c26063a86e75b754d0cddd89f5377ca2571f03

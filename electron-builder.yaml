@@ -1,15 +1,20 @@
 directories:
   buildResources: buildResources
   output: dist
-extraResources: ["tools", "external-resources", 'firmwares', "statics", "drivers"]
+extraFiles: ['LICENSE', 'LICENSE.ScratchFoundation', 'TRADEMARK', "tools", "external-resources", 'firmwares', "drivers"]
 
-appId: openblock.cc.openblock-desktop
+appId: delightmom.Dbit-desktop
 productName: "Dbit+"
-publish: # empty provider list = don't publish
+publish:
+  - provider: github
+  - provider: spaces
+    name: openblock
+    path: desktop
+    region: sgp1
 
 fileAssociations:
   ext: ob
-  name: Openblock project file
+  name: OpenBlock project file
   role: Editor
   icon: buildResources/OpenBlockFile.ico
 
@@ -18,19 +23,19 @@ mac:
   entitlements: buildResources/entitlements.mac.plist
   extendInfo:
     NSCameraUsageDescription: >-
-        This app requires camera access when taking a photo in the paint editor or using the video sensing blocks.
+        This app requires camera access when using the video sensing blocks.
     NSMicrophoneUsageDescription: >-
         This app requires microphone access when recording sounds or detecting loudness.
   gatekeeperAssess: true
   hardenedRuntime: true
   icon: buildResources/OpenBlockDesktop.icns
   provisioningProfile: embedded.provisionprofile
-  artifactName: "DBit+ ${version}.${ext}"
+  artifactName: "DBit+_${version}.${ext}"
   target:
     - dmg
     # - mas
 dmg:
-  title: "DBit+ ${version}"
+  title: "DBit+_${version}"
 # mas:
 #   category: public.app-category.education
 #   entitlements: buildResources/entitlements.mas.plist
@@ -40,6 +45,7 @@ dmg:
 # masDev:
 #   type: development
 #   provisioningProfile: mas-dev.provisionprofile
+
 win:
   icon: buildResources/OpenBlockDesktop.ico
   target:
@@ -47,12 +53,12 @@ win:
     - nsis
 # appx:
 #   identityName: "OpenblockTeam.OpenblockDesktop
-#   publisherDisplayName: "Openblock Team"
+#   publisherDisplayName: "OpenBlock Team"
 #   publisher: "CN=2EC43DF1-469A-4119-9AB9-568A0A1FF65F"
-#   artifactName: "Openblock ${version}.${ext}"
+#   artifactName: "OpenBlock ${version}.${ext}"
 nsis:
   oneClick: false # allow user to choose per-user or per-machine
   allowToChangeInstallationDirectory: true
   include: buildResources/installer.nsh
 #   license: LICENSE
-  artifactName: "DBit+ ${version} Setup.${ext}"
+  artifactName: "DBit+_${version}_Setup.${ext}"

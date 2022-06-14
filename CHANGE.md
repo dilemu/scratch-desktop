@@ -1,5 +1,149 @@
 # Change Log
 
+## v2.3.1
+
+- **New feature**
+
+    1. The user can use the enter key to send data in the serialport console.
+    2. Increase default upload baudrate for esp32/8266 to increase upload speed.
+    3. Delete the blocks in the sensor directory that are not commonly used by esp32.
+    4. Added support for Ctrl + A/B/C/D shortcut keys in the serial terminal to better interact with the micrpython repl interface.
+    5. Remove the arduino mini board that is not used frequently.
+    6. Modify arduino nano download parameters to use old bootloader and add missing A6 A7 pins.
+    7. Widen upload window.
+    8. Block the esp32/8266 pins which are used by internal flash.
+    9. Add input-pulldown mode of esp32 pin mode.
+
+- **Fix bug**
+
+    1. The license file is not packaged in the installation package.
+    2. Fixed the error that the outer frame and the main body of the microbit terminal block were the same color.
+    3. Fix the error that some int type input can be set to decimal.
+    4. Microbit show piexl at xx with brightness xx block's brightness parameter don't take effect.
+    5. Fix the error that the microbit v2 download program fails.
+
+## v2.3.0
+
+- **New feature**
+
+    1. Application auto-update feature is now supported.
+    2. Supports opening multiple apps at the same time.
+    3. Added Traditional Chinese translation.
+    4. Add software loading interface.
+    5. Added code editing support, you can now edit the code after unlocking the code area.
+    6. Hide sprites and sounds tabs in upload mode.
+    7. Disable the edit button in the menu bar in upload mode.
+    8. In the upload mode of micropython, the building blocks of custom list variables can generate code.
+    9. Optimize and reduce the file size of external resources.
+    10. Merge the installation files for the 32-bit and 64-bit versions of the windows version.
+    11. When saving a project without a hardware device, convert it to a format supported by scratch3, so that scratch3 can open the pure scratch project created by openblock. (The save format is still .ob but scratch can be forced to open)
+
+- **Fix bug**
+
+    1. Fix the problem that the software needs to copy the cache when it is first started, resulting in no display for a long time. After the user clicks the startup icon multiple times, multiple programs operate on the cache at the same time, causing the cache file to be damaged. Then the program fails to start.
+    2. Fix wrong translation of button to turn on and off acceleration mode.
+    3. After selecting arduino uno and then mega2560, the pin menu is not updated.
+    4. The arduino pin interrupt function code is not right.
+    5. The python variable increase block will cut off the first digit after inputting more than two digits.
+    6. The generated code logic is incorrect when using a repeating block on a head block other than a hardware device startup event block.
+    7. The code of arduino contains block should be 'indexOf' but not 'indexof'.
+    8. The arduino's comparison block generates code that does not conform to the rules of the C language when the input is a pair of strings or a single character.
+    9. In micropython, since there is no global declaration for the custom variable in the function defined by the custom function or event, an error will be reported when using the custom variable block under these blocks.
+    10. Adjust the micropython code generation structure to prevent variables and functions from being called before the definition declaration.
+    11. Blocks generate code when they are dragged from the toolbar but not yet placed in the workspace.
+    12. Fix the arduino device sometimes wait for more than ten seconds to start uploading after the compilation is completed.
+
+## v2.2.9
+
+- **New feature**
+
+    1. Optimize the windows nsis installation script. Now the first installation path will be set to the root directory of the c drive, and the subsequent installation path will be automatically detected and modified to the installation directory selected during the first installation.
+    2. Add support for original scratch project files.
+    3. Add the devil bird to the sprite and custom library.
+
+- **Fix bug**
+
+    1. Switching the programming mode while the sprite is speaking will cause the interface to crash.
+    2. When loading a project file containing custom list variables, an error will be reported that the loading cannot be completed.
+    3. The parameter blocks of custom functions will be disabled when switching modes.
+    4. The serial port data of esp32 and microbit is not displayed in the terminal.
+    5. Correct the programming language icon of esp32/8266.
+    6. Correct the center coordinates of the demon bird's rotation.
+
+## v2.2.8
+
+- **New feature**
+
+    1. Add default program mode setting in the device configuration.
+
+- **Fix bug**
+
+    1. After loading a new project file, the connection of the old device is not disconnected.
+    2. After loading a new project file, if the project does not have a device extension, the code area will be empty.
+    3. When connecting to a device without fimata service, there will be no alert prompt to download the firmware.
+    4. Optimize the firmata communication architecture in real-time mode to fix some potential problems.
+    5. Fix the misspelled device configuration name from leanMore to learnMore.
+    6. Fix the inaccurate meaning of Arduino block name from whole number to integer.
+
+## v2.2.7
+
+- **Fix bug**
+
+    1. After loading the project file, save the project file again and load it, there will be an error and the project cannot be loaded.
+    2. After loading the project file, click the new project button, and the interface will crash.
+    3. When opening the extension interface in upload mode, it will freeze for 1~2 seconds before the extension options are loaded.
+
+## v2.2.6
+
+- **Fix bug**
+
+    1. The newline parameter of arduino mega2560 serial send block does not take effect.
+    2. After creating a new sprite, the device selection is cleared.
+    3. An error occurs after load a project file that contains multiple device extensions.
+
+## v2.2.5
+
+- **Fix bug**
+
+    1. Because shield in openblock-resource source code is misspelled as sheild, shield filter in GUI interface is null.
+    2. In VM, one more line of startheartbeat function call is written, and startheartbeat repeats reentry, resulting in real-time communication error.
+    3. Add rtscts flow control configuration to repair the situation that some three-party compatible boards cannot be used when opening rtscts flow control.
+    4. Cannot edit input-box after the alert or confirm window pops up.
+    5. The device selection is not cleared after a new project is created.
+    6. The old device is not disconnected after a new project is created.
+
+## v2.2.4
+
+- **Fix bug**
+
+    1. There is no A0 ~ A5 option for the read digital pin blocks of control boards such as Arduino UNO.
+    2. After using the shortcut key Ctrl + Z to modify blocks, the code on the right side is not updated.
+
+## v2.2.3
+
+- **Fix bug**
+
+    1. When you double-click to open the project file with the selected device, an error will occur in loading.
+    2. After add comment for device extension block and save the project file. If try to load the project after restart the software, there is another comment window appear which cannot able to delete.
+
+## v2.2.2
+
+- **New feature**
+
+    1. Optimize the font and line break display effect of the serial terminal.
+    2. Display the loaded extensions first in the extensions library.
+    3. Modify the default serial port configuration of esp8266 to the official default 76800.
+    4. Modify the esp8266 upload rate to 921600 to speed up the upload speed.
+
+- **Fix bug**
+
+    1. When loading a project with a extension, an error will be reported and cannot be loaded.
+    2. The input box of the variable increase block is parsed incorrectly when other blocks or variables are placed.
+    3. In the even sprite, the movement blocks in the toolbox area will not automatically change to the coordinates of the character's current position.
+    4. Fix the problem that esp32 and esp8266 cannot start after clicking the reset button when connecting to openblock due to the lack of serial port to enable dtr rts flow control.
+    5. After connecting and disconnecting the device once in upload mode, no matter what mode is connected to the device again, it will not be able to establish communication with the connection firmata.
+    6. ESP32 and ESP8266 will get stuck for a long time between compiling and uploading.
+
 ## v2.2.1
 
 - **Fix bug**
@@ -120,38 +264,38 @@
 
 - **Fix bug**
 
-	1. Third party's block which from vm code generator error.
+    1. Third party's block which from vm code generator error.
 
 ## v1.2.0beta
 
 - **New feature**
 
-	1. Now most alert will automaticly disapear after 5s.
-	2. Completed the blocks of microbit.
-	3. Add a servo extension as demo for microbit.
-	4. After installing the new version of the software, the old cache will be cleared automatically.
+    1. Now most alert will automaticly disapear after 5s.
+    2. Completed the blocks of microbit.
+    3. Add a servo extension as demo for microbit.
+    4. After installing the new version of the software, the old cache will be cleared automatically.
 
 - **New  device/kit**
 
-	1. Arduino Mini
-	2. QDP Robot(齐护机器人) kit
+    1. Arduino Mini
+    2. QDP Robot(齐护机器人) kit
 
 - **Fix bug**
 
-	1. Error usb hardware id of cp2102.
-	2. Error translation of microbit.
-	3. Cannot scan to devices after loading a project.
-	4. The loaded device extension still exists after switching the device selection.
+    1. Error usb hardware id of cp2102.
+    2. Error translation of microbit.
+    3. Cannot scan to devices after loading a project.
+    4. The loaded device extension still exists after switching the device selection.
 
 ## v1.1.0beta
 
 - **New feature**
 
-	1. Blocks could over flow the flyout boundary when mouse enter.
-	2. Extension can be auto loaded when device selected.
+    1. Blocks could over flow the flyout boundary when mouse enter.
+    2. Extension can be auto loaded when device selected.
 
 - **New device/kit**
 
-	1. microbit
-	2. iron robot kit
+    1. microbit
+    2. iron robot kit
 

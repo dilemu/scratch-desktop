@@ -111,6 +111,12 @@ const makeConfig = function (defaultConfig, options) {
                     include: [MONACO_DIR, /antd.css/, /web-cam.css/, /tm-img-train.css/],
                     use: ['style-loader', 'css-loader']
                 },
+                {
+                    test: /node_modules[/\\](iconv-lite)[/\\].+/,
+                    resolve: {
+                        aliasFields: ['main']
+                    }
+                }
             ]
         },
         plugins: [
