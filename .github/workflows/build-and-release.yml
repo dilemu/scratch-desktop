@@ -11,50 +11,6 @@ on:
       - '.github/*'
 
 jobs:
-  create-release:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Get tag
-        id: tag
-        uses: dawidd6/action-get-tag@v1
-
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.tag.outputs.tag }}
-          release_name: DBit+ ${{ steps.tag.outputs.tag }}
-          body: |
-            ## Change Log (en)
-
-            - **New feature**
-
-                1. Feature 1.
-                2. Feature 2.
-
-            - **Fix bug**
-
-                1. Bug 1.
-                2. Bug 2.
-
-            ## 更改日志 (zh-cn)
-
-            - **新功能**
-
-                1. 功能1。
-                2. 功能2。
-
-            - **修复错误**
-
-                1. 错误1。
-                2. 错误2。
-          draft: true
-          prerelease: false
-
   build-windows:
     needs: create-release
     runs-on: windows-2019
@@ -70,37 +26,91 @@ jobs:
         run: |
           npm ci
 
-      - name: Build and Publish
+      # - name: Build and Publish
+      #   env:
+      #     GA_ID: ${{ secrets.GA_ID }}
+      #     GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      #     DO_KEY_ID: ${{ secrets.DO_KEY_ID }}
+      #     DO_SECRET_KEY: ${{ secrets.DO_SECRET_KEY }}
+      #     NODE_ENV: production
+      #     NODE_OPTIONS: --max_old_space_size=4096
+      #   run: npm run publish
+      - name: Build Dist
         env:
           GA_ID: ${{ secrets.GA_ID }}
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          DO_KEY_ID: ${{ secrets.DO_KEY_ID }}
-          DO_SECRET_KEY: ${{ secrets.DO_SECRET_KEY }}
           NODE_ENV: production
           NODE_OPTIONS: --max_old_space_size=4096
-        run: npm run publish
+        run: npm run dist
 
-  build-mac:
-    needs: create-release
-    runs-on: macos-latest
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: DBit+-win-x64.exe
+          path: dist/DBit+*Setup.exe
+          retention-days: 1
+
+  create-release:
+    needs: [build-windows]
+    if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
-      - name: Use Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14.x'
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@master
 
-      - name: Npm Install
-        run: npm ci
+      - name: Get tag
+        id: tag
+        uses: dawidd6/action-get-tag@v1
 
-      - name: Build and Publish
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
         env:
-          GA_ID: ${{ secrets.GA_ID }}
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          DO_KEY_ID: ${{ secrets.DO_KEY_ID }}
-          DO_SECRET_KEY: ${{ secrets.DO_SECRET_KEY }}
-          NODE_ENV: production
-          NODE_OPTIONS: --max_old_space_size=8192
-          CSC_IDENTITY_AUTO_DISCOVERY: false
-        run: npm run publish
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        with:
+          tag_name: ${{ steps.tag.outputs.tag }}
+          release_name: DBit+ Desktop ${{ steps.tag.outputs.tag }}
+          body: |
+            - **New feature**
+              1. First Change
+              2. Second Change
+            - **Fix bug**
+              1. First Change
+              2. Second Change
+          draft: true
+          prerelease: false
+
+      - name: Download all build result
+        uses: actions/download-artifact@v2
+
+      # Windows x64 Release
+      - name: Zip win x64 file
+        uses: papeloto/action-zip@v1
+        with:
+            files: DBit+-win-x64.exe
+            dest: DBit+-win-x64.zip
+
+      - name: Relase Windows x64 package
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./DBit+-win-x64.zip
+          asset_name: DBit+-${{ steps.package-version.outputs.current-version }}-win-x64.zip
+          asset_content_type: application/zip
+
+      # Checksum Release
+      - name: Checksum
+        run: sha256sum DBit+-*.zip >> checksums.txt
+
+      - uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: checksums.txt
+          asset_name: ${{ steps.package-version.outputs.current-version }}-checksums-sha256.txt
+          asset_content_type: application/zip
