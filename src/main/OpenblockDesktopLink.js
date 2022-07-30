@@ -8,7 +8,7 @@ import ElectronStore from 'electron-store';
 import compareVersions from 'compare-versions';
 
 import OpenBlockLink from 'openblock-link';
-import OpenblockResourceServer from 'openblock-resource';
+import OpenblockResourceServer from 'delightmom-resource';
 
 class OpenblockDesktopLink {
     constructor () {
