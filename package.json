@@ -3,7 +3,7 @@
   "productName": "Dbit+",
   "description": "Dbit+ as a self-contained desktop application",
   "author": "bjppss",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "license": "MIT",
   "scripts": {
     "link": "npm link delightmom-scratch-gui delightmom-scratch-l10n",
@@ -28,7 +28,7 @@
     "upload:releaseInfo": "node ./scripts/upload-release-info.mjs",
     "doBuild": "node ./scripts/electron-builder-wrapper.js",
     "dist": "npm run clean && npm run compile && npm run fetch:all && npm run doBuild -- --mode=dist",
-    "publish": "npm run clean && npm run compile && npm run fetch:all  && npm run doBuild -- --mode=publish",
+    "publish": "NODE_ENV=production && npm run clean && npm run compile && npm run fetch:all  && npm run doBuild -- --mode=publish",
     "test": "npm run test:lint",
     "test:lint": "eslint --cache --color --ext .jsx,.js src scripts"
   },
