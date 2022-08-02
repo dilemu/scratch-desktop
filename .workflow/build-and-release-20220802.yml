@@ -4,7 +4,7 @@ displayName: build-and-release-20220802
 triggers:
   trigger: auto
   push:
-    branches:
+    tags:
       include:
         - v.*
 stages:
