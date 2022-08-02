@@ -47,11 +47,7 @@ jobs:
           name: DBit+-win-x64.exe
           path: dist/DBit+*Setup.exe
           retention-days: 1
-      
-      - name: Publish Npm
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-        run: npm publish
+ 
   create-release:
     needs: [build-windows]
     if: ${{ startsWith(github.ref, 'refs/tags/v') }}
