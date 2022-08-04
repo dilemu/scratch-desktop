@@ -85,17 +85,17 @@ jobs:
       - name: Download all build result
         uses: actions/download-artifact@v2
 
-      # # Windows x64 Release
-      # - name: Zip win x64 file
-      #   uses: papeloto/action-zip@v1
-      #   with:
-      #       files: DBit+-win-x64.exe
-      #       dest: DBit+-win-x64.zip
-
-      - uses: edgarrc/action-7z@v1
+      # Windows x64 Release
+      - name: Zip win x64 file
+        uses: papeloto/action-zip@v1
         with:
-          # args: 7z a -t7z -mx=9 DBit+-${{ steps.package-version.outputs.current-version }}-win-x64.7z ./DBit+-win-x64.exe
-          args: 7z a -mx -myx -mmt=off -ms=on -mtm=off -mtc=off -mta=off -mtr=off -m0=LZMA:d=384m:fb=273:lc=8 -mmc=1000000000 DBit+-${{ steps.package-version.outputs.current-version }}-win-x64.7z ./DBit+-win-x64.exe
+            files: DBit+-win-x64.exe
+            dest: DBit+-win-x64.zip
+
+      # - uses: edgarrc/action-7z@v1
+      #   with:
+      #     # args: 7z a -t7z -mx=9 DBit+-${{ steps.package-version.outputs.current-version }}-win-x64.7z ./DBit+-win-x64.exe
+      #     args: 7z a -mx -myx -mmt=off -ms=on -mtm=off -mtc=off -mta=off -mtr=off -m0=LZMA:d=384m:fb=273:lc=8 -mmc=1000000000 DBit+-${{ steps.package-version.outputs.current-version }}-win-x64.7z ./DBit+-win-x64.exe
 
       - name: Relase Windows x64 package
         uses: actions/upload-release-asset@v1
@@ -103,10 +103,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          # asset_path: ./DBit+-win-x64.zip
-          asset_path: DBit+-${{ steps.package-version.outputs.current-version }}-win-x64.7z
-          # asset_name: DBit+-${{ steps.package-version.outputs.current-version }}-win-x64.zip
+          asset_path: ./DBit+-win-x64.zip
+          # asset_path: DBit+-${{ steps.package-version.outputs.current-version }}-win-x64.7z
           asset_name: DBit+-${{ steps.package-version.outputs.current-version }}-win-x64.zip
+          # asset_name: DBit+-${{ steps.package-version.outputs.current-version }}-win-x64.zip
           asset_content_type: application/zip
 
       # Checksum Release
