@@ -136,4 +136,4 @@ jobs:
         run: coscmd config -a $SECRET_ID -s $SECRET_KEY -b $BUCKET -e cos.accelerate.myqcloud.com
         
       - name: Upload tencent cos
-        run: coscmd upload ./DBit+-${{ steps.package-version.outputs.current-version }}-win-x64.zip /
+        run: coscmd upload ./DBit+-win-x64.zip /${{ steps.package-version.outputs.current-version }}
