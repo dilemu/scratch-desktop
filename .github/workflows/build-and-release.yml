@@ -117,7 +117,8 @@ jobs:
           SECRET_KEY: ${{ secrets.TCOSSecretKey }}
           BUCKET: dilemu-1253248162
           REGION: ap-beijing
-        run: coscmd config -a $SECRET_ID -s $SECRET_KEY -b $BUCKET -r $REGION
+        # run: coscmd config -a $SECRET_ID -s $SECRET_KEY -b $BUCKET -r $REGION
+        run: coscmd config -a $SECRET_ID -s $SECRET_KEY -b $BUCKET -e dilemu-1253248162.cos.accelerate.myqcloud.com
         
       - name: Upload
         run: coscmd upload ./DBit+-${{ steps.package-version.outputs.current-version }}-win-x64.7z /
