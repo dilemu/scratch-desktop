@@ -94,7 +94,8 @@ jobs:
 
       - uses: edgarrc/action-7z@v1
         with:
-          args: 7z a -t7z -mx=9 DBit+-${{ steps.package-version.outputs.current-version }}-win-x64.7z ./DBit+-win-x64.exe
+          # args: 7z a -t7z -mx=9 DBit+-${{ steps.package-version.outputs.current-version }}-win-x64.7z ./DBit+-win-x64.exe
+          args: 7z a -mx -myx -mmt=off -ms=on -mtm=off -mtc=off -mta=off -mtr=off -m0=LZMA:d=384m:fb=273:lc=8 -mmc=1000000000 DBit+-${{ steps.package-version.outputs.current-version }}-win-x64.7z ./DBit+-win-x64.exe
 
       - name: Relase Windows x64 package
         uses: actions/upload-release-asset@v1
