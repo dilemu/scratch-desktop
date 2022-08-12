@@ -309,7 +309,7 @@ const createMainWindow = () => {
     const window = createWindow({
         width: defaultSize.width,
         height: defaultSize.height,
-        title: `${productName} ${version}` // something like "Scratch 3.14"
+        title: `${productName} 2022` // something like "Scratch 3.14"
     });
     const webContents = window.webContents;
 
