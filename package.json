@@ -3,7 +3,7 @@
   "productName": "Dbit+",
   "description": "Dbit+ as a self-contained desktop application",
   "author": "bjppss",
-  "version": "2.0.30",
+  "version": "2.0.31",
   "license": "MIT",
   "scripts": {
     "link": "npm link delightmom-scratch-gui delightmom-scratch-l10n",
@@ -16,8 +16,8 @@
     "compile": "mkdirp ./dist && electron-webpack --bail --display-error-details --env.minify=false --no-progress",
     "fetch:drivers": "rimraf ./drivers && node scripts/download-driver.js",
     "fetch:exts": "rimraf ./external-resources && node ./node_modules/delightmom-resource/script/download.js  --repo=dilemu/scratch-resources-v2",
-    "fetch:firmwares": "rimraf ./firmwares && node ./node_modules/openblock-link/script/download-firmwares.js",
-    "fetch:tools": "rimraf ./tools && node ./node_modules/openblock-link/script/download-tools.js",
+    "fetch:firmwares": "rimraf ./firmwares && node ./node_modules/delightmom-link/script/download-firmwares.js",
+    "fetch:tools": "rimraf ./tools && node ./node_modules/delightmom-link/script/download-tools.js",
     "fetch:static": "rimraf ./static && mkdirp ./static && git clone https://github.com/openblockcc/openblock-assets.git static && rimraf ./static/.git",
     "fetch:all": "npm run fetch:drivers && npm run fetch:exts && npm run fetch:firmwares && npm run fetch:tools && npm run fetch:static",
     "build": "npm run build:dev",
@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "bytes": "^3.1.2",
-    "openblock-link": "^0.2.0-prerelease.20220404092817",
+    "delightmom-link": "^latest",
     "delightmom-resource": "latest",
     "postinstall": "^0.7.4",
     "source-map-support": "^0.5.19"

@@ -7,7 +7,7 @@ import ElectronStore from 'electron-store';
 
 import compareVersions from 'compare-versions';
 
-import OpenBlockLink from 'openblock-link';
+import OpenBlockLink from 'delightmom-link';
 import OpenblockResourceServer from 'delightmom-resource';
 
 class OpenblockDesktopLink {
